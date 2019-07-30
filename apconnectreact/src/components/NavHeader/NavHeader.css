@@ -1,15 +1,16 @@
 .nav{
     height: 100px;
-    background-color: #333;
+    background-color: black;
     height: 80px;
     color: whitesmoke;
-    margin-right: -15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
     margin-top: -25px;
-    margin-left: -10px;
+    
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 101%
+    
 }
 .logo{
     color:white;

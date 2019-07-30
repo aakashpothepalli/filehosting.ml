@@ -1,0 +1,11 @@
+.item:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+  .text{
+      margin:0px;
+      padding :20px;
+  }
+hr{
+    margin: 0px;
+}

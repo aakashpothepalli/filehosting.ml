@@ -57,12 +57,14 @@ componentDidMount(){
 
 
 render(){
-
+ 
    return(
-    <div>{this.state.ListData}</div>
+       <div>
+    <div className="ListData">{this.state.ListData}</div>
+    </div>
     )
 
-}
+} 
 }
 
 export default MainContent
