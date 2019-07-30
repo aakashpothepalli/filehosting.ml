@@ -24,7 +24,7 @@ constructor(){
       this.state={
           text : "",
           item : "",
-          ListData :[]
+          ListData :["Loading..."]
       }
       
 }
@@ -53,6 +53,7 @@ componentDidMount(){
         
     })
 }
+
 
 
 render(){
