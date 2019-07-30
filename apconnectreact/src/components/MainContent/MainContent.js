@@ -1,4 +1,4 @@
-import React ,{Component} from "react"
+import React  from "react"
 import "./MainContent.css"
 import firebase from "firebase"
 import Item from "./Item"
@@ -41,7 +41,7 @@ componentDidMount(){
         let val =[]
         for(let i=0;i<keys.length;i++){
             val.push(data[keys[i]].name)
-        }
+        } 
 
        console.log(val)
 
