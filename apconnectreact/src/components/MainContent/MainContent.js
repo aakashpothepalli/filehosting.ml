@@ -2,7 +2,8 @@ import React  from "react"
 import "./MainContent.css"
 import firebase from "firebase"
 import Item from "./Item"
-
+import AddItem from "./AddItem";
+ 
 class MainContent extends React.Component{
     
 constructor(){
@@ -60,7 +61,10 @@ render(){
  
    return(
        <div>
-    <div className="ListData">{this.state.ListData}</div>
+    <div className="ListData">{
+        this.state.ListData}
+    </div>
+     <AddItem/>   
     </div>
     )
 

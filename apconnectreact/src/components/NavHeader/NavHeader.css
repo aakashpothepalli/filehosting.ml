@@ -1,7 +1,7 @@
 .nav{
     height: 100px;
     background-color: black;
-    height: 80px;
+    height: 60px;
     color: whitesmoke;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     
@@ -15,9 +15,52 @@
 .logo{
     color:white;
     font-size: 20px;
-    text-align: left;
-    padding-top: 35px;
+    float:left;
+    padding-top: 20px;
     padding-left: 10px;
     font-family:   'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    
+    cursor: pointer;
 }
+li{
+    color:white;
+    font-size: 20px;
+   float:right;
+    padding-top:20px;
+    margin-right:30px;
+    padding-bottom: 10px;
+    font-family:   'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: default;
+    padding-bottom:17px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.menu:hover {
+   background-color: #0C9;
+    
+  }
+  .home:hover{
+    background-color: #0C9;
+  }
+
+  .menu {
+    list-style-type: none;
+    }
+    
+    .home{
+        list-style-type: none;
+    }
+    
+  
+    .dropdowntrue{
+        color:white;
+        list-style-type:none;
+        display:block;
+        background-color: #0C9;
+        
+        float: right;
+    }
+    .dropdownfalse{
+        display:none;
+    }
+    
+   
