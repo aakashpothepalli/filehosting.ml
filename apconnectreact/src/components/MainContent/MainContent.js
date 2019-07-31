@@ -1,9 +1,9 @@
 import React  from "react"
 import "./MainContent.css"
 import firebase from "firebase"
-import Item from "./Item"
-import AddItem from "./AddItem";
- 
+import AddItem from "./AddItem/AddItem";
+import {ListGroup,ListGroupItem}from "react-bootstrap" 
+import {toast} from "react-toastify"
 class MainContent extends React.Component{
     
 constructor(){
@@ -27,7 +27,7 @@ constructor(){
           item : "",
           ListData :["Loading..."]
       }
-      
+      this.getContentState = this.getContentState.bind(this)
 }
 
 
@@ -46,24 +46,29 @@ componentDidMount(){
 
        console.log(val)
 
-       let Listdata = val.map(name => <Item name={name}/>)
+       let Listdata = val.map(name => <ListGroupItem action onClick={null}><h4>{name}</h4> </ListGroupItem>)
         this.setState({
             ListData :Listdata
             }
         )
         
+        
     })
 }
 
-
+getContentState(){
+    return(
+        this.state.ListData
+    )
+}
 
 render(){
  
    return(
        <div>
-    <div className="ListData">{
-        this.state.ListData}
-    </div>
+     <ListGroup>
+    <div className="ListData">{this.state.ListData}</div>
+    </ListGroup>
      <AddItem/>   
     </div>
     )
