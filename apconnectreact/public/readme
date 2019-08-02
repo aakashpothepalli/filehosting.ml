@@ -1,0 +1,9 @@
+install additional packages
+
+sudo npm install --save react-bootstrap
+
+sudo npm install react-floating-action-button
+
+npm install --save react react-copy-to-clipboard
+
+npm i react-toasts

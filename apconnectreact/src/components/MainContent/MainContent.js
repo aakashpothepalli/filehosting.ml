@@ -1,13 +1,15 @@
 import React  from "react"
 import "./MainContent.css"
 import firebase from "firebase"
-import AddItem from "./AddItem/AddItem";
+import AddItem from "./AddItem/AddItem.js"
 import {ListGroup,ListGroupItem}from "react-bootstrap" 
-import {toast} from "react-toastify"
+import {ToastsContainer, ToastsStore} from 'react-toasts'
+
+
 class MainContent extends React.Component{
     
 constructor(){
-    super()
+    super() 
    
     
     var firebaseConfig = {
@@ -24,7 +26,7 @@ constructor(){
       
       this.state={
           text : "",
-          item : "",
+          name : "",
           ListData :["Loading..."]
       }
       this.getContentState = this.getContentState.bind(this)
@@ -32,6 +34,11 @@ constructor(){
 
 
 componentDidMount(){
+    function ListItemClickFunction(name){
+        navigator.clipboard.writeText(name)
+        ToastsStore.success("Copied "+name+" to Clipboard")
+    }
+
     const db= firebase.database()
 
     db.ref("list").once("value").then((snap)=>{
@@ -46,7 +53,11 @@ componentDidMount(){
 
        console.log(val)
 
-       let Listdata = val.map(name => <ListGroupItem action onClick={null}><h4>{name}</h4> </ListGroupItem>)
+       let Listdata = val.map(name => 
+       <ListGroupItem 
+       action onClick={()=>ListItemClickFunction(name)}><h4>{name}</h4> 
+       
+       </ListGroupItem>)
         this.setState({
             ListData :Listdata
             }
@@ -66,10 +77,13 @@ render(){
  
    return(
        <div>
+       <AddItem/> 
      <ListGroup>
+     
     <div className="ListData">{this.state.ListData}</div>
     </ListGroup>
-     <AddItem/>   
+    <ToastsContainer store={ToastsStore}/>
+     
     </div>
     )
 

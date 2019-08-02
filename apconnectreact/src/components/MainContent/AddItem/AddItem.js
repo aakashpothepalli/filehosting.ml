@@ -1,29 +1,29 @@
 import React from "react"
-import {Container,Button,Link} from "react-floating-action-button"
-import AddText from "./AddText"
+import {ListGroupItem,Button}from "react-bootstrap" 
+import {ToastsContainer, ToastsStore} from 'react-toasts'
+
 class AddItem extends React.Component{
 
+constructor(){
+    super()
+    this.AddNewItem = this.AddNewItem.bind(this)
+}
+
+AddNewItem(){
+ToastsStore.success("hey yiu have clicked me");
+}
 render(){
     return(
-        <Container >
-        
-            <Link href="#"
-                tooltip="Add a new File"
-                icon="fas fa-file" 
-                />
-            <Link href="#"
-                tooltip="Add a new Text"
-                icon="fas fa-font" 
-                />
-            <Button  tooltip="Add Item"
-                icon="fas fa-plus"
-                rotate={true}
-                
-                />
-         
-        </Container>
+        <div>
+        <ListGroupItem>
+            <div>
+                <Button onClick={()=>this.AddNewItem()}>Add New Item</Button>
+            </div>
+        </ListGroupItem>
+        <ToastsContainer store={ToastsStore}/>
+        </div>
         )
     }
 }
-
+ 
 export default AddItem
