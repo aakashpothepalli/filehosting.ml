@@ -27,7 +27,8 @@ constructor(){
       this.state={
           text : "",
           name : "",
-          ListData :["Loading..."]
+          ListData :["Loading..."],
+          db :null
       }
       this.getContentState = this.getContentState.bind(this)
 }
@@ -39,6 +40,7 @@ componentDidMount(){
         ToastsStore.success("Copied "+name+" to Clipboard")
     }
 
+    
     const db= firebase.database()
 
     db.ref("list").once("value").then((snap)=>{
@@ -54,10 +56,7 @@ componentDidMount(){
        console.log(val)
 
        let Listdata = val.map(name => 
-       <ListGroupItem 
-       action onClick={()=>ListItemClickFunction(name)}><h4>{name}</h4> 
-       
-       </ListGroupItem>)
+       <ListGroupItem action onClick={()=>ListItemClickFunction(name)}><h4>{name}</h4></ListGroupItem>)
         this.setState({
             ListData :Listdata
             }
@@ -91,4 +90,5 @@ render(){
 }
 
 export default MainContent
+
     
