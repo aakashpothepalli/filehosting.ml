@@ -18,7 +18,6 @@ constructor(props){
 }
 
 AddNewItem(){
-ToastsStore.success("hey yiu have clicked me");
 
 this.setState((prevState)=>({
     AddMenuHidden : !prevState.AddMenuHidden
@@ -27,7 +26,6 @@ this.setState((prevState)=>({
 }
 AddNewText(){
 const text = this.textInput.current.value
-ToastsStore.success("the text is "+text)
 
 const key = this.state.db.ref("list").push().key
 const newItemDetails={
@@ -42,7 +40,11 @@ this.state.db.ref("list").update(newItem)
 
 ToastsStore.success("data inserted")
 
-this.props.referenceCallback()
+this.props.reloadcomponent()
+
+this.setState((prevState)=>({
+    AddMenuHidden : !prevState.AddMenuHidden
+}))
 }
 
 render(){
