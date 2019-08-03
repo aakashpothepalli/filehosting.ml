@@ -55,8 +55,8 @@ render(){
  
    return(
        <div>
-       <AddItem db={this.state.db} onRef={ref => (this.referenceCallback = ref)}
-       referenceCallback = {this.ReloadComponent.bind(this)}/> 
+       <AddItem db={this.state.db} onRef={ref => (this.reloadcomponent = ref)}
+       reloadcomponent = {this.ReloadComponent.bind(this)}/> 
      <ListGroup>
      
     <div className="ListData">{this.state.ListData}</div>
