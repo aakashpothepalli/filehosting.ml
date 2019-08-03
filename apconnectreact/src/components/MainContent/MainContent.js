@@ -4,7 +4,7 @@ import Firebase from "../../Firebase"
 import AddItem from "./AddItem/AddItem.js"
 import {ListGroup,ListGroupItem}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
-
+import Item from "./Item/Item" 
 
 class MainContent extends React.Component{
     
@@ -22,7 +22,7 @@ constructor(){
 
 
 componentDidMount(){
-    function ListItemClickFunction(name){
+    function ListItemClickFunction(name,id){
         navigator.clipboard.writeText(name)
         ToastsStore.success("Copied "+name+" to Clipboard")
     }
@@ -42,10 +42,19 @@ componentDidMount(){
 
         let val =[]
         for(let i=0;i<keys.length;i++){
-            val.push(data[keys[i]].name)
+            val.push(data[keys[i]])
         } 
+            console.log(val)
 
-       let Listdata = val.map(name => <ListGroupItem action onClick={()=>ListItemClickFunction(name)}><h4>{name}</h4></ListGroupItem>)
+       let Listdata = val.map(data => 
+    //    <ListGroupItem action onClick={()=>ListItemClickFunction(data.name,data.id)} key={data.id}>
+    
+    //        <h4>{data.name}</h4>
+        
+    //    </ListGroupItem>)
+            <Item name = {data.name} id = {data.id} ></Item>
+       )
+
         Listdata.reverse()
        this.setState({
             ListData :Listdata
@@ -63,14 +72,9 @@ render(){
  
    return(
        <div>
-<<<<<<< HEAD
-       <AddItem db={this.state.db} onRef={ref => (this.referenceCallback = ref)}
-       referenceCallback = {this.ReloadComponent.bind(this)}/> 
-
-=======
        <AddItem db={this.state.db} onRef={ref => (this.reloadcomponent = ref)}
        reloadcomponent = {this.ReloadComponent.bind(this)}/> 
->>>>>>> d8f480b1d7413f57bb3b27f526cfce19104384e1
+
      <ListGroup>
     <div className="ListData">{this.state.ListData}</div>
     </ListGroup>

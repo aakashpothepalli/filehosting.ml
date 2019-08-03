@@ -2,7 +2,6 @@ import React from "react"
 import {ListGroupItem,Button,Form}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import "./AddItem.css"
-import {Dialog} from "@material-ui/core"
 
 class AddItem extends React.Component{
 
@@ -54,7 +53,7 @@ render(){
             <Button onClick={()=>this.AddNewItem()}>Add New Item</Button>
         </ListGroupItem>
         
-        <ListGroupItem hidden={this.state.AddMenuHidden} clasName="AddOptions">
+        <ListGroupItem hidden={this.state.AddMenuHidden} className="AddOptions">
             <Form>
                 <Form.Control ref = {this.textInput} type="text" placeholder="enter your text"></Form.Control>
                 <Form.Text></Form.Text>
