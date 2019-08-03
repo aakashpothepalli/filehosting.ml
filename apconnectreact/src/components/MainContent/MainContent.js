@@ -27,6 +27,14 @@ componentDidMount(){
         ToastsStore.success("Copied "+name+" to Clipboard")
     }
 
+    function CopyText(){
+
+    }
+
+    function DeleteElement(){
+        this.ReloadComponent()
+    }
+
 
     this.state.db.ref("list").once("value").then((snap)=>{
        let data= snap.val()
@@ -57,8 +65,8 @@ render(){
        <div>
        <AddItem db={this.state.db} onRef={ref => (this.referenceCallback = ref)}
        referenceCallback = {this.ReloadComponent.bind(this)}/> 
+
      <ListGroup>
-     
     <div className="ListData">{this.state.ListData}</div>
     </ListGroup>
     <ToastsContainer store={ToastsStore}/>

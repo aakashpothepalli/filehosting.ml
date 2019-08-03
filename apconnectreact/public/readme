@@ -7,3 +7,5 @@ sudo npm install react-floating-action-button
 npm install --save react react-copy-to-clipboard
 
 npm i react-toasts
+
+npm install @material-ui/core

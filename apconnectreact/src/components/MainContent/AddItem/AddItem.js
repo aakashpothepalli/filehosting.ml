@@ -1,8 +1,8 @@
 import React from "react"
-import {ListGroupItem,Button,ListGroup,Form}from "react-bootstrap" 
+import {ListGroupItem,Button,Form}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import "./AddItem.css"
-import MainContent from "../MainContent";
+import {Dialog} from "@material-ui/core"
 
 class AddItem extends React.Component{
 
