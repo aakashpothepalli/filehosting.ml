@@ -2,7 +2,7 @@ import React  from "react"
 import "./MainContent.css"
 import Firebase from "../../Firebase"
 import AddItem from "./AddItem/AddItem.js"
-import {ListGroup,ListGroupItem}from "react-bootstrap" 
+import {ListGroupItem}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import Item from "./Item/Item" 
 
@@ -18,23 +18,19 @@ constructor(){
           db :Firebase.database()
       }
      this.ReloadComponent = this.ReloadComponent.bind(this)
+     this.DeleteItem = this.DeleteItem.bind(this)
 }
 
 
 componentDidMount(){
+
     function ListItemClickFunction(name,id){
         navigator.clipboard.writeText(name)
         ToastsStore.success("Copied "+name+" to Clipboard")
     }
 
-    function CopyText(){
 
-    }
-
-    function DeleteElement(){
-        this.ReloadComponent()
-    }
-
+ 
 
     this.state.db.ref("list").once("value").then((snap)=>{
        let data= snap.val()
@@ -46,13 +42,8 @@ componentDidMount(){
         } 
             console.log(val)
 
-       let Listdata = val.map(data => 
-    //    <ListGroupItem action onClick={()=>ListItemClickFunction(data.name,data.id)} key={data.id}>
-    
-    //        <h4>{data.name}</h4>
-        
-    //    </ListGroupItem>)
-            <Item name = {data.name} id = {data.id} ></Item>
+       let Listdata = val.map(ItemInVal => 
+            <Item name = {ItemInVal.name} id = {ItemInVal.id} reload={this.ReloadComponent}></Item>
        )
 
         Listdata.reverse()
@@ -63,6 +54,10 @@ componentDidMount(){
         
     })
 }
+DeleteItem(id){
+this.state.db.ref("list").child(id).remove()
+this.ReloadComponent()
+}
 
 ReloadComponent(){
     this.componentDidMount()
@@ -72,13 +67,12 @@ render(){
  
    return(
        <div>
-       <AddItem db={this.state.db} onRef={ref => (this.reloadcomponent = ref)}
-       reloadcomponent = {this.ReloadComponent.bind(this)}/> 
+       <AddItem db={this.state.db} /> 
+     <ListGroupItem>
+    {this.state.ListData}
+    </ListGroupItem>
 
-     <ListGroup>
-    <div className="ListData">{this.state.ListData}</div>
-    </ListGroup>
-    <ToastsContainer store={ToastsStore}/>
+    <ToastsContainer store={ToastsStore } itemHeight={20} offset={10} />
      
     </div>
     )

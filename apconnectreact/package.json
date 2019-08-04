@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.0",
     "bootstrap": "^4.3.1",
+    "dom-scroll-recycler": "^1.1.4",
     "firebase": "^6.3.3",
     "firebase-tools": "^7.2.1",
     "git": "^0.1.5",
@@ -16,7 +17,8 @@
     "react-scripts": "3.0.1",
     "react-toast-notifications": "^2.2.1",
     "react-toastify": "^5.3.2",
-    "react-toasts": "^3.0.3"
+    "react-toasts": "^3.0.3",
+    "react-window": "^1.8.5"
   },
   "scripts": {
     "start": "react-scripts start",

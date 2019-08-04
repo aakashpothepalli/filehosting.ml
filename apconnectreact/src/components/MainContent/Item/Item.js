@@ -1,26 +1,39 @@
 import React from "react"
 import {ListGroupItem, Button}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
-
+import Firebase from "../../../Firebase"
 class Item extends React.Component{
 
     constructor(props){
     super(props)
 
     this.state={
-        isHidden :true
+        isHidden :true,
+        db:Firebase.database()
     }
     this.onItemClick= this.onItemClick.bind(this)
+    this.CopyText = this.CopyText.bind(this)
 }
 onItemClick(id){
 
-ToastsStore.success("you have clicked "+ id)
+
 this.setState((prevState)=>({
     isHidden: !prevState.isHidden
 }))
 
 }
 
+CopyText(){
+    navigator.clipboard.writeText(this.props.name)
+    ToastsStore.success("Text copied ")
+}
+
+DeleteItem(){
+this.state.db.ref("list").child(this.props.id).remove()
+this.props.reload()
+ToastsStore.success("Item removed ")
+
+}
     render(){
         return(
             <>
@@ -29,13 +42,15 @@ this.setState((prevState)=>({
                     <h3>  {this.props.name} </h3 >
                     <ListGroupItem hidden={this.state.isHidden}>
                         <div>
-                            <Button style={{marginRight:"10px"}}>Copy</Button>
-                            <Button style={{marginLeft:"10sp"}}>Delete</Button>
+                            <Button onClick={()=> this.CopyText() } style={{marginRight:"10px"}}>Copy</Button>
+
+                            <Button onClick={()=>this.DeleteItem()} style={{marginLeft:"10sp"}}  >Delete</Button>
+
                         </div>
                     </ListGroupItem>
                 </>
             </ListGroupItem>
-            <ToastsContainer store={ToastsStore}/>
+            <ToastsContainer store={ToastsStore} />
 
             </>
         )
