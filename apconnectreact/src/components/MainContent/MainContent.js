@@ -67,7 +67,7 @@ render(){
  
    return(
        <div>
-       <AddItem db={this.state.db} /> 
+       <AddItem db={this.state.db} reload={this.ReloadComponent}/> 
      <ListGroupItem>
     {this.state.ListData}
     </ListGroupItem>

@@ -39,7 +39,7 @@ this.state.db.ref("list").update(newItem)
 
 ToastsStore.success("data inserted")
 
-this.props.reloadcomponent()
+this.props.reload()
 
 this.setState((prevState)=>({
     AddMenuHidden : !prevState.AddMenuHidden
