@@ -1,5 +1,5 @@
 import React from "react"
-import {ListGroupItem, Button}from "react-bootstrap" 
+import {ListGroupItem, Button,Form}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import Firebase from "../../../Firebase"
 class Item extends React.Component{
@@ -39,7 +39,8 @@ ToastsStore.success("Item removed ")
             <>
             <ListGroupItem action onClick={()=> this.onItemClick(this.props.id) } > 
                 <>
-                    <h3>  {this.props.name} </h3 >
+                <Form.Control as="textarea" rows="4"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.name}</Form.Control>
+                    {/* <h3>  {this.props.name} </h3 > */}
                     <ListGroupItem hidden={this.state.isHidden}>
                         <div>
                             <Button onClick={()=> this.CopyText() } style={{marginRight:"10px"}}>Copy</Button>
@@ -50,6 +51,7 @@ ToastsStore.success("Item removed ")
                     </ListGroupItem>
                 </>
             </ListGroupItem>
+
             <ToastsContainer store={ToastsStore} />
 
             </>

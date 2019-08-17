@@ -68,9 +68,8 @@ render(){
    return(
        <div>
        <AddItem db={this.state.db} reload={this.ReloadComponent}/> 
-     <ListGroupItem>
     {this.state.ListData}
-    </ListGroupItem>
+   
 
     <ToastsContainer store={ToastsStore } itemHeight={20} offset={10} />
      
