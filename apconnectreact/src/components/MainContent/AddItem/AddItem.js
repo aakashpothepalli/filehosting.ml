@@ -55,7 +55,7 @@ render(){
         
         <ListGroupItem hidden={this.state.AddMenuHidden} className="AddOptions">
             <Form>
-                <Form.Control ref = {this.textInput} type="text" placeholder="enter your text"></Form.Control>
+                <Form.Control size ="lg" ref = {this.textInput} type="text" placeholder="enter your text"></Form.Control>
                 <Form.Text></Form.Text>
                 <Button onClick={()=>this.AddNewText()}>Save</Button>
             </Form>
