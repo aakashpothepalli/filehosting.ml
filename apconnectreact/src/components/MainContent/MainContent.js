@@ -18,19 +18,11 @@ constructor(){
           db :Firebase.database()
       }
      this.ReloadComponent = this.ReloadComponent.bind(this)
-     this.DeleteItem = this.DeleteItem.bind(this)
 }
 
 
 componentDidMount(){
 
-    function ListItemClickFunction(name,id){
-        navigator.clipboard.writeText(name)
-        ToastsStore.success("Copied "+name+" to Clipboard")
-    }
-
-
- 
 
     this.state.db.ref("list").once("value").then((snap)=>{
        let data= snap.val()
@@ -43,7 +35,7 @@ componentDidMount(){
             console.log(val)
 
        let Listdata = val.map(ItemInVal => 
-            <Item name = {ItemInVal.name} id = {ItemInVal.id} reload={this.ReloadComponent}></Item>
+            <Item name = {ItemInVal.name} id = {ItemInVal.id} date = {ItemInVal.date} reload={this.ReloadComponent}></Item>
        )
 
         Listdata.reverse()
@@ -54,12 +46,12 @@ componentDidMount(){
         
     })
 }
-DeleteItem(id){
-this.state.db.ref("list").child(id).remove()
-this.ReloadComponent()
-}
+
 
 ReloadComponent(){
+    this.setState({
+        ListData :["Loading..."]
+    })
     this.componentDidMount()
 }
 
