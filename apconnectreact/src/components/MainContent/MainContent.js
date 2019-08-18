@@ -2,7 +2,6 @@ import React  from "react"
 import "./MainContent.css"
 import Firebase from "../../Firebase"
 import AddItem from "./AddItem/AddItem.js"
-import {ListGroupItem}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import Item from "./Item/Item" 
 
@@ -35,7 +34,7 @@ componentDidMount(){
             console.log(val)
 
        let Listdata = val.map(ItemInVal => 
-            <Item name = {ItemInVal.name} id = {ItemInVal.id} date = {ItemInVal.date} reload={this.ReloadComponent}></Item>
+            <Item name = {ItemInVal.name} key = {ItemInVal.id} id = {ItemInVal.id} date = {ItemInVal.date} reload={this.ReloadComponent}></Item>
        )
 
         Listdata.reverse()
@@ -60,11 +59,10 @@ render(){
    return(
        <div>
        <AddItem db={this.state.db} reload={this.ReloadComponent}/> 
-    {this.state.ListData}
-   
+       
+        {this.state.ListData}
 
-    <ToastsContainer store={ToastsStore } itemHeight={20} offset={10} />
-     
+    <ToastsContainer store= {ToastsStore} itemHeight={20} offset={10} />
     </div>
     )
 

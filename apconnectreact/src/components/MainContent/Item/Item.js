@@ -57,10 +57,13 @@ UpdateItem(){
         return(
             <>
             <ListGroupItem action onClick={()=> this.onItemClick(this.props.id) } > 
-                <>
+                
                 <Form.Control as="textarea" rows="5"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.name}</Form.Control>
-                    {/* <h3>  {this.props.name} </h3 > */}
-                    <ListGroupItem hidden={this.state.isHidden}>
+                    {/* <h3>  {this.props.name} </h3 > */}                   
+                
+            </ListGroupItem>
+
+            <ListGroupItem hidden={this.state.isHidden}>
                         <div>
                             <Button onClick={()=> this.CopyText() } style={{marginRight:"10px"}}>Copy</Button>
 
@@ -69,8 +72,6 @@ UpdateItem(){
                             <Button onClick={()=>this.DeleteItem()} style={{marginLeft:"10sp"}} >Delete</Button>
 
                         </div>
-                    </ListGroupItem>
-                </>
             </ListGroupItem>
 
             <ToastsContainer store={ToastsStore} />
