@@ -30,7 +30,8 @@ const key = this.state.db.ref("list").push().key
 const newItemDetails={
     name:text,
     id:key,
-    date: new Date()
+    date: new Date(),
+    isLocked:false
 }
 const newItem={}
 newItem[key]=newItemDetails

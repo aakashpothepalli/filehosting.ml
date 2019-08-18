@@ -10,11 +10,13 @@ class Item extends React.Component{
 
     this.state={
         isHidden :true,
+        isLocked:this.props.item.isLocked,
         db:Firebase.database(),        
     }
     this.onItemClick= this.onItemClick.bind(this)
     this.CopyText = this.CopyText.bind(this)
     this.UpdateItem = this.UpdateItem.bind(this)
+    this.LockItem = this.LockItem.bind(this)
     }
 
 onItemClick(id){
@@ -30,7 +32,7 @@ CopyText(){
 }
 
 DeleteItem(){
-this.state.db.ref("list").child(this.props.id).remove()
+this.state.db.ref("list").child(this.props.item.id).remove()
 this.props.reload()
 ToastsStore.success("Item removed ")
 
@@ -39,13 +41,14 @@ ToastsStore.success("Item removed ")
 UpdateItem(){
     
     const UpdatedItem ={
-        id: this.props.id,
-        date :this.props.date,
+        id: this.props.item.id,
+        date :this.props.item.date,
+        isLocked :this.state.isLocked,
         name: this.textInput.current.value
     } 
     const Ut={}
 
-    Ut[this.props.id]= UpdatedItem
+    Ut[this.props.item.id]= UpdatedItem
     this.state.db.ref("list").update(Ut)
 
     ToastsStore.success("Saved")
@@ -53,12 +56,31 @@ UpdateItem(){
 
 }
 
+LockItem(){
+this.setState({
+    isLocked:true
+})
+
+
+const UpdatedItem ={
+    id: this.props.item.id,
+    date :this.props.item.date,
+    name: this.textInput.current.value,
+    isLocked: this.state.isLocked
+} 
+const Ut={}
+
+Ut[this.props.item.id]= UpdatedItem
+this.state.db.ref("list").update(Ut)
+ToastsStore.success("locked")
+}
+
     render(){
         return(
             <>
-            <ListGroupItem action onClick={()=> this.onItemClick(this.props.id) } > 
+            <ListGroupItem action onClick={()=> this.onItemClick(this.props.item.id) } > 
                 
-                <Form.Control as="textarea" rows="5"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.name}</Form.Control>
+                <Form.Control as="textarea" rows="5"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.item.name}</Form.Control>
                     {/* <h3>  {this.props.name} </h3 > */}                   
                 
             </ListGroupItem>
@@ -69,7 +91,7 @@ UpdateItem(){
 
                             <Button onClick={()=>this.UpdateItem()} style={{marginRight:"10px"}}  >Save</Button>
 
-                            <Button onClick={()=>this.DeleteItem()} style={{marginLeft:"10sp"}} >Delete</Button>
+                            <Button hidden = {this.state.isLocked} onClick={()=>this.DeleteItem()} style={{marginRight:"10sp"}} >Delete</Button>
 
                         </div>
             </ListGroupItem>

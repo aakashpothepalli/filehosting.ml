@@ -8,7 +8,7 @@ render(){
 return(
  
 <Navbar bg="light" expand="lg" >
-  <Navbar.Brand href="#home">Send Files .tk</Navbar.Brand>
+  <Navbar.Brand href="#home">Send Files .tk<h6>Version 1.1</h6></Navbar.Brand>
  
 </Navbar>
 

@@ -34,7 +34,7 @@ componentDidMount(){
             console.log(val)
 
        let Listdata = val.map(ItemInVal => 
-            <Item name = {ItemInVal.name} key = {ItemInVal.id} id = {ItemInVal.id} date = {ItemInVal.date} reload={this.ReloadComponent}></Item>
+            <Item key = {ItemInVal.id} item= {ItemInVal} reload={this.ReloadComponent}></Item>
        )
 
         Listdata.reverse()
