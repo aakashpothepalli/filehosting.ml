@@ -1,5 +1,5 @@
 import React from "react"
-import {ListGroupItem, Button,Form}from "react-bootstrap" 
+import {ListGroupItem, Button,Form,Nav}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import Firebase from "../../../Firebase"
 class Item extends React.Component{
@@ -17,6 +17,7 @@ class Item extends React.Component{
     this.CopyText = this.CopyText.bind(this)
     this.UpdateItem = this.UpdateItem.bind(this)
     this.LockItem = this.LockItem.bind(this)
+    this.onLinkClick = this.onLinkClick.bind(this)
     }
 
 onItemClick(id){
@@ -74,11 +75,28 @@ Ut[this.props.item.id]= UpdatedItem
 this.state.db.ref("list").update(Ut)
 ToastsStore.success("locked")
 }
-
+onLinkClick(){
+    this.setState((prevState)=>({
+        isHidden: false
+    }))
+ 
+}
     render(){
+        if(this.props.item.type==="link"){
+            return(
+                <div>
+                <ListGroupItem action onClick ={()=> this.onLinkClick() }>
+                    {/* <Button variant="link" href= {this.props.item.url}>{this.props.item.name}  - Click to Download</Button> */}
+                    <Nav.Link href= {this.props.item.url}> {this.props.item.name} - Click to Download</Nav.Link>
+                </ListGroupItem>
+
+                </div>
+            )
+        }
+        else if(this.props.item.type==="text"){
         return(
             <>
-            <ListGroupItem action onClick={()=> this.onItemClick(this.props.item.id) } > 
+            <ListGroupItem action onClick={()=> this.onItemClick() } > 
                 
                 <Form.Control as="textarea" rows="5"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.item.name}</Form.Control>
                     {/* <h3>  {this.props.name} </h3 > */}                   
@@ -99,7 +117,8 @@ ToastsStore.success("locked")
             <ToastsContainer store={ToastsStore} />
 
             </>
-        )
+            )
+        }
     }
 }
 export default Item

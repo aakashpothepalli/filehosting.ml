@@ -26,16 +26,19 @@ this.setState((prevState)=>({
 }))
 
 }
-AddNewText(text,type){
+
+AddNewText(text,type,url){
 
 
 const key = this.state.db.ref("list").push().key
+
 const newItemDetails={
     name:text,
     id:key,
     date: new Date(),
     isLocked:false,
-    type:type
+    type:type,
+    url :url
 }
 const newItem={}
 newItem[key]=newItemDetails
@@ -60,14 +63,12 @@ handleFile(){
     axios.post("https://api.anonymousfiles.io",data)
         .then(report=>{
             console.log(report.data.url)
-            this.AddNewText(report.data.url,"link")
+            this.AddNewText(report.data.name,"link",report.data.url)
     
         })
         .catch(error=>console.log(error))
 
-    this.setState((prevState)=>({
-        AddMenuHidden : !prevState.AddMenuHidden
-    }))
+   
     
 }
 
