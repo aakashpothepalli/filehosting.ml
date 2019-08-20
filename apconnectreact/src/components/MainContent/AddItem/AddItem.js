@@ -2,7 +2,7 @@ import React from "react"
 import {ListGroupItem,Button,Form}from "react-bootstrap" 
 import {ToastsContainer, ToastsStore} from 'react-toasts'
 import "./AddItem.css"
-
+import axios from "axios"
 class AddItem extends React.Component{
 
 constructor(props){
@@ -11,9 +11,12 @@ constructor(props){
     this.AddNewText = this.AddNewText.bind(this)
     this.state = {
         AddMenuHidden:true,
-         db:props.db
+         db:props.db,
+         
     }
+    this.fileInput = React.createRef()
     this.textInput = React.createRef()
+    this.handleFile = this.handleFile.bind(this)
 }
 
 AddNewItem(){
@@ -23,15 +26,16 @@ this.setState((prevState)=>({
 }))
 
 }
-AddNewText(){
-const text = this.textInput.current.value
+AddNewText(text,type){
+
 
 const key = this.state.db.ref("list").push().key
 const newItemDetails={
     name:text,
     id:key,
     date: new Date(),
-    isLocked:false
+    isLocked:false,
+    type:type
 }
 const newItem={}
 newItem[key]=newItemDetails
@@ -47,6 +51,26 @@ this.setState((prevState)=>({
 }))
 }
 
+handleFile(){
+    
+    console.log(this.fileInput.current.files[0].name)
+
+    let data = new FormData()
+    data.append("file",this.fileInput.current.files[0])
+    axios.post("https://api.anonymousfiles.io",data)
+        .then(report=>{
+            console.log(report.data.url)
+            this.AddNewText(report.data.url,"link")
+    
+        })
+        .catch(error=>console.log(error))
+
+    this.setState((prevState)=>({
+        AddMenuHidden : !prevState.AddMenuHidden
+    }))
+    
+}
+
 render(){
     return(
         <div>
@@ -55,12 +79,14 @@ render(){
         </ListGroupItem>
         
         <ListGroupItem hidden={this.state.AddMenuHidden} className="AddOptions">
-            <Form>
                 <Form.Control as="textarea" rows="3"   ref = {this.textInput} type="text" placeholder="enter your text"></Form.Control>
                 <Form.Text></Form.Text>
-                <Button onClick={()=>this.AddNewText()}>Save</Button>
-            </Form>
-        
+                <Button onClick={()=>this.AddNewText(this.textInput.current.value,"text")}>Save</Button>
+        </ListGroupItem>
+
+        <ListGroupItem hidden={this.state.AddMenuHidden}>
+            <input type="file" ref ={this.fileInput} style={{marginLeft:"10sp"}}/>
+            <Button onClick={()=>this.handleFile()} > Send</Button>
         </ListGroupItem>
 
         <ToastsContainer store={ToastsStore}/>

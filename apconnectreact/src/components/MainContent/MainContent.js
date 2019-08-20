@@ -21,8 +21,7 @@ constructor(){
 
 
 componentDidMount(){
-
-
+  
     this.state.db.ref("list").once("value").then((snap)=>{
        let data= snap.val()
         let keys = Object.keys(data)

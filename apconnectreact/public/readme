@@ -2,8 +2,7 @@ install additional packages
 
 sudo npm install --save react-bootstrap
 
-sudo npm install react-floating-action-button
 
 npm i react-toasts
 
-npm install dom-scroll-recycler
+npm i axios

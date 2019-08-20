@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.3.0",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "curl": "^0.1.4",
     "dom-scroll-recycler": "^1.1.4",
     "firebase": "^6.3.3",
     "firebase-tools": "^7.2.1",
