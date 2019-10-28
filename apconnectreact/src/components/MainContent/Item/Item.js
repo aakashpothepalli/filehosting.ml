@@ -93,7 +93,7 @@ onLinkClick(){
                 </div>
             )
         }
-        else if(this.props.item.type==="text"){
+        else {
         return(
             <>
             <ListGroupItem action onClick={()=> this.onItemClick() } > 
