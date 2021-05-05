@@ -15,7 +15,7 @@ class NavHeader extends React.Component {
     return (
 
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">File Hosting .ml<h6>Version 1.2</h6>
+        <Navbar.Brand href="#home">File Hosting .ml<h6>Version 1.3</h6>
         </Navbar.Brand>
 
       </Navbar>

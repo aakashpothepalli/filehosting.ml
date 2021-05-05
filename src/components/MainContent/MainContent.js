@@ -56,7 +56,7 @@ ReloadComponent(){
 render(){
  
    return(
-       <div>
+       <div style={{marginLeft:20,marginRight:20}}>
        <AddItem db={this.state.db} reload={this.ReloadComponent}/> 
        
         {this.state.ListData}

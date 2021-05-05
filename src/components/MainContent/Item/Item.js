@@ -22,7 +22,7 @@ class Item extends React.Component{
 
 onItemClick(id){
 this.setState((prevState)=>({
-    isHidden: false
+    isHidden: !prevState.isHidden
 }))
 
 }
@@ -77,17 +77,19 @@ ToastsStore.success("locked")
 }
 onLinkClick(){
     this.setState((prevState)=>({
-        isHidden: false
+        isHidden: !prevState.isHidden
     }))
  
 }
     render(){
         if(this.props.item.type==="link"){
             return(
-                <div>
+                <div style={{marginTop:10,marginBottom:10}}>
                 <ListGroupItem action onClick ={()=> this.onLinkClick() }>
                     {/* <Button variant="link" href= {this.props.item.url}>{this.props.item.name}  - Click to Download</Button> */}
                     <Nav.Link href= {this.props.item.url}> {this.props.item.name} - Click to Download</Nav.Link>
+                    <Button hidden = {this.state.isHidden} onClick={()=>this.DeleteItem()} style={{marginRight:"10sp"}} >Delete</Button>
+
                 </ListGroupItem>
 
                 </div>
@@ -95,7 +97,7 @@ onLinkClick(){
         }
         else {
         return(
-            <>
+            <div  style={{marginTop:10,marginBottom:10}}>
             <ListGroupItem action onClick={()=> this.onItemClick() } > 
                 
                 <Form.Control as="textarea" rows="5"   ref = {this.textInput} type="text" placeholder="enter your text">{this.props.item.name}</Form.Control>
@@ -116,7 +118,7 @@ onLinkClick(){
 
             <ToastsContainer store={ToastsStore} />
 
-            </>
+            </div>
             )
         }
     }
